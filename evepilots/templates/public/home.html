@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <h1>Test</h1>
+    <ul>
+        {% for capsuleer in context.new_capsuleers %}
+            <li>
+                <a href="{{ url_for('capsuleers.details', capsuleer_id=capsuleer.id) }}">
+                    {{ capsuleer.name }} - {{ capsuleer.corporation.id }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

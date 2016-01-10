@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <h1>Capsuleer</h1>
+    <div class="media col-md-6">
+        <div class="pull-left"><img src="{{ context.imageserver }}" class="img-responsive img-rounded media-object" alt="Portrait for {{ context.name }}"></div>
+        
+        <div class="media-body">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th scope="row">Name</th>
+                        <td>{{ context.name }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Security Status</th>
+                        <td>{{ context.security_status }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Birthday</th>
+                        <td>{{ context.birthday }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
