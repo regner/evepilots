@@ -8,7 +8,7 @@ from sqlalchemy.sql.expression import nullsfirst
 
 from flask.ext.servicelayer import SQLAlchemyService
 
-from evepilots.extensions import db, evelink_eve
+from evepilots.extensions import db, celery, evelink_eve
 from evepilots.capsuleers.models import CapsuleerModel, CapsuleerCorpHistory, CapsuleerSecStatusHistory
 from evepilots.utils.evelink import evelink_ts_to_datetime
 from evepilots.corporations.utils import ensure_corp_exists
@@ -35,6 +35,7 @@ class CapsuleerService(SQLAlchemyService):
         
         return self._find().order_by(order_by).limit(quantity)
     
+    @celery.task
     def update_information(self, model):
         """
             Updates a given capsuleer model and triggers an update of the

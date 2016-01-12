@@ -18,9 +18,8 @@ def update_multiple_capsuleers(quantity=1):
     """
 
     for capsuleer in capsuleers.get_needing_update(quantity):
-        # TODO: Make this a celery task
         try:
-            capsuleers.update_information(capsuleer)
+            capsuleers.update_information.delay(capsuleer)
         except:
             print capsuleer.id
             capsuleers.delete(capsuleer)

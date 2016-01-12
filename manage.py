@@ -4,7 +4,7 @@ from flask.ext.script import Manager, Server, prompt_bool
 from flask.ext.migrate import MigrateCommand
 
 from evepilots.app import create_app
-from evepilots.extensions import db
+from evepilots.extensions import db, celery
 from evepilots.capsuleers.scripts import UpdateExistingCapsuleers, LoadCapsuleers
 from evepilots.corporations.scripts import UpdateExistingCorporations
 
