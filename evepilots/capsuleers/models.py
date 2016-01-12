@@ -1,5 +1,7 @@
 
 
+from datetime import datetime
+
 from evepilots.extensions import db
 
 
@@ -13,6 +15,7 @@ class CapsuleerModel(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=False)
     name = db.Column(db.String(length=256))
     corporation_id = db.Column(db.Integer, db.ForeignKey('corporations.id'))
+    security_status = db.Column(db.Integer)
     last_checked = db.Column(db.DateTime)
     corp_history = db.relationship('CapsuleerCorpHistory', lazy='dynamic')
     sec_status_history = db.relationship('CapsuleerSecStatusHistory', lazy='dynamic')
@@ -41,4 +44,4 @@ class CapsuleerSecStatusHistory(db.Model):
     
     id = db.Column(db.Integer, db.ForeignKey('capsuleers.id'), primary_key=True)
     sec_status = db.Column(db.Float)
-    date = db.Column(db.Date)
+    datetime = db.Column(db.DateTime, default=datetime.utcnow)

@@ -49,9 +49,15 @@ class CapsuleerService(SQLAlchemyService):
         
         capsuleer_info = evelink_eve.character_info_from_id(model.id).result
         capsuleer_corp_history.update_from_id(model.id)
+        capsuleer_sec_history.create(**{
+            'id': model.id,
+            'sec_status': capsuleer_info['sec_status'],
+        })
     
         ensure_corp_exists(capsuleer_info['corp']['id'])
         
+        # TODO: Potential DB performance increase in only updating columns that
+        # have changed.
         self.update(model, **{
             'name': capsuleer_info['name'],
             'security_status': capsuleer_info['sec_status'],
@@ -138,3 +144,4 @@ class CapsuleerSecStatusService(SQLAlchemyService):
 
 capsuleers = CapsuleerService()
 capsuleer_corp_history = CapsuleerCopHistoryService()
+capsuleer_sec_history = CapsuleerSecStatusService()

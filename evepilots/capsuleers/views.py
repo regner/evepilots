@@ -20,7 +20,7 @@ class CapsuleerView(MethodView):
         
         context = {
             'name': capsuleers_details.name,
-            'security_status': capsuleers_details.sec_status,
+            'security_status': capsuleers_details.security_status,
             'imageserver': eveimageserver.get_image_server_link(capsuleer_id, 'char', 128),
             'birthday': capsuleer_corp_history.get_birthday_from_id(capsuleer_id).start_time,
         }
