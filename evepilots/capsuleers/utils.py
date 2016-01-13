@@ -1,13 +1,6 @@
 
 
-from datetime import datetime
-
-from evelink.eve import EVE
-from sqlalchemy.sql.expression import nullsfirst
-
-from evepilots.capsuleers.services import capsuleers, capsuleer_corp_history
-from evepilots.extensions import db, evelink_eve
-from evepilots.utils.evelink import evelink_ts_to_datetime
+from evepilots.capsuleers.services import capsuleers
 
 
 def update_multiple_capsuleers(quantity=1):
@@ -18,11 +11,7 @@ def update_multiple_capsuleers(quantity=1):
     """
 
     for capsuleer in capsuleers.get_needing_update(quantity):
-        try:
-            capsuleers.update_information.delay(capsuleer)
-        except:
-            print capsuleer.id
-            capsuleers.delete(capsuleer)
+        capsuleers.update_information.delay(capsuleer)
 
 
 def load_capsuleers_file(file_path):
